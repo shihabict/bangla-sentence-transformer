@@ -1,0 +1,11 @@
+__pycache__/
+venv/
+.idea/
+.pytest_cache/
+*.pyc
+*.pkl
+*.pickle
+*.pdf
+DATA/
+/models
+test.py
