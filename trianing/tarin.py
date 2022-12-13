@@ -80,7 +80,7 @@ class BNSentenceTransformer:
                           optimizer_params={'lr': 2e-5, 'eps': 1e-6}
                           )
 
-    def train_new(self, path):
+    def train_new(self, path,number_of_sentences,output_path):
         logging.basicConfig(format='%(asctime)s - %(message)s',
                             datefmt='%Y-%m-%d %H:%M:%S',
                             level=logging.INFO,
@@ -92,7 +92,10 @@ class BNSentenceTransformer:
         max_seq_length = 128  # Student model max. lengths for inputs (number of word pieces)
         train_batch_size = 32  # Batch size for training
         inference_batch_size = 32  # Batch size at inference
-        max_sentences_per_language = 100000  # Maximum number of  parallel sentences for training
+        if number_of_sentences == 'Full_data':
+            max_sentences_per_language = None
+        else:
+            max_sentences_per_language = number_of_sentences  # Maximum number of  parallel sentences for training
         # max_sentences_per_language = 10  # Maximum number of  parallel sentences for training
         train_max_sentence_length = 250  # Maximum length (characters) for parallel training sentences
 
@@ -101,7 +104,7 @@ class BNSentenceTransformer:
 
         num_evaluation_steps = 500
 
-        output_path = "bengal_transformer"
+        # output_path = "bengal_transformer"
         logging.info("Load teacher model")
         teacher_model = SentenceTransformer(teacher_model_name)
         logging.info("Create student model from scratch")
@@ -152,7 +155,7 @@ class BNSentenceTransformer:
                           save_best_model=True,
                           optimizer_params={'lr': 2e-5, 'eps': 1e-6}
                           )
-        student_model.save('bengal_transformer')
+        student_model.save(output_path)
         # print(student_model.best_score)
 
 

@@ -8,4 +8,5 @@ venv/
 *.pdf
 DATA/
 /models
+/bengal_transformer
 test.py

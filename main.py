@@ -7,5 +7,8 @@ if __name__ == '__main__':
 
     # path = 'DATA/dataset.txt'
     path = 'DATA/hf_aibarat_dataset.txt'
-    transformer.train_new(path)
+    # number_of_sentences = 'Full_data'
+    number_of_sentences = 100
+    save_model_name = f'bangla_transformer_{number_of_sentences}'
+    transformer.train_new(path,number_of_sentences,save_model_name)
 
