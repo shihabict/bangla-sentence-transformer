@@ -9,4 +9,5 @@ venv/
 DATA/
 /models
 /bengal_transformer
+/bangla_transformer_100
 test.py

@@ -4,7 +4,7 @@ from sentence_transformers.util import pytorch_cos_sim
 
 
 transformer = SentenceTransformer(
-    'bengal_transformer/')
+    'bangla_transformer_100/')
 
 sentences = ['আপনার বয়স কত', 'আমি তোমার বয়স জানতে চাই', 'আমার ফোন ভাল আছে', 'আপনার সেলফোনটি দুর্দান্ত দেখাচ্ছে']
 
