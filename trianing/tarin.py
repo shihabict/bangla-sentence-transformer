@@ -106,7 +106,7 @@ class BNSentenceTransformer:
 
         # output_path = "bengal_transformer"
         logging.info("Load teacher model")
-        teacher_model = SentenceTransformer(teacher_model_name)
+        teacher_model = SentenceTransformer(teacher_model_name,device='cuda')
         logging.info("Create student model from scratch")
         word_embedding_model = models.Transformer(student_model_name, max_seq_length=max_seq_length)
         pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension())
@@ -144,6 +144,7 @@ class BNSentenceTransformer:
         logging.info('Evaluation appended')
 
         logging.info('Student Model training is going to start')
+        student_model.device
         # Train the model
         student_model.fit(train_objectives=[(train_dataloader, train_loss)],
                           evaluator=evaluation.SequentialEvaluator(evaluators,
