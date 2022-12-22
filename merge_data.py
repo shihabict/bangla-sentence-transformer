@@ -35,7 +35,7 @@ class MergeData:
 
         # splited_combined_data = splited_combined_data[:1000]
 
-        pool = Pool(processes=2)
+        pool = Pool(processes=18)
         for _ in tqdm(pool.imap_unordered(self.write_into_txt, splited_combined_data),
                            total=len(splited_combined_data)):
             pass
