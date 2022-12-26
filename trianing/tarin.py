@@ -1,3 +1,4 @@
+import torch
 from sentence_transformers import SentenceTransformer, LoggingHandler, models, evaluation, losses, util
 from torch.utils.data import DataLoader
 from sentence_transformers.datasets import ParallelSentencesDataset
@@ -5,6 +6,19 @@ import os
 import logging
 import numpy as np
 
+import torch.multiprocessing as mp
+from torch.utils.data.distributed import DistributedSampler
+from torch.nn.parallel import DistributedDataParallel as DDP
+from torch.distributed import init_process_group, destroy_process_group
+def ddp_setup(rank: int, world_size: int):
+  """
+  Args:
+      rank: Unique identifier of each process
+     world_size: Total number of processes
+  """
+  os.environ["MASTER_ADDR"] = "localhost"
+  os.environ["MASTER_PORT"] = "12355"
+  init_process_group(backend="nccl", rank=rank, world_size=world_size)
 
 class BNSentenceTransformer:
 
@@ -31,15 +45,21 @@ class BNSentenceTransformer:
         output_path = "output/bangla-sentence-transformer"
         logging.info("Load teacher model")
         teacher_model = SentenceTransformer(teacher_model_name)
+        teacher_model =  DDP(teacher_model, device_ids=[0,1])
+
         logging.info("Create student model from scratch")
         word_embedding_model = models.Transformer(student_model_name, max_seq_length=max_seq_length)
         pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension())
         student_model = SentenceTransformer(student_model_name)
+        student_model = DDP(student_model, device_ids=[0,1])
+
         train_data = ParallelSentencesDataset(student_model=student_model, teacher_model=teacher_model,
                                               batch_size=inference_batch_size, use_embedding_cache=False)
         train_data.load_data(path, max_sentences=max_sentences_per_language,
                              max_sentence_length=train_max_sentence_length)
-        train_dataloader = DataLoader(train_data, shuffle=True, batch_size=train_batch_size)
+        train_dataloader = DataLoader(train_data, shuffle=False, batch_size=train_batch_size,
+                                      sampler=DistributedSampler(train_data))
+
         train_loss = losses.MSELoss(model=student_model)
 
         #### Evaluate cross-lingual performance on different tasks #####
@@ -80,11 +100,15 @@ class BNSentenceTransformer:
                           optimizer_params={'lr': 2e-5, 'eps': 1e-6}
                           )
 
-    def train_new(self, path,number_of_sentences,output_path):
+    def train_new(self, world_size, path,number_of_sentences,output_path):
         logging.basicConfig(format='%(asctime)s - %(message)s',
                             datefmt='%Y-%m-%d %H:%M:%S',
                             level=logging.INFO,
                             handlers=[LoggingHandler()])
+
+        print(f'DEVICES : {torch.cuda.device_count()}')
+
+        ddp_setup(rank, world_size)
 
         teacher_model_name = 'stsb-xlm-r-multilingual'
         student_model_name = 'xlm-roberta-base'
@@ -159,6 +183,7 @@ class BNSentenceTransformer:
         student_model.save(output_path)
         # print(student_model.best_score)
 
+        destroy_process_group()
 
 if __name__ == '__main__':
     transformer = BNSentenceTransformer()
