@@ -110,7 +110,8 @@ class BNSentenceTransformer:
         logging.info("Create student model from scratch")
         word_embedding_model = models.Transformer(student_model_name, max_seq_length=max_seq_length)
         pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension())
-        student_model = SentenceTransformer(modules=[word_embedding_model, pooling_model])
+        student_model = SentenceTransformer(modules=[word_embedding_model, pooling_model],
+                          device='cuda')
         train_data = ParallelSentencesDataset(student_model=student_model, teacher_model=teacher_model,
                                               batch_size=inference_batch_size, use_embedding_cache=False)
         train_data.load_data(path, max_sentences=max_sentences_per_language,
@@ -149,7 +150,6 @@ class BNSentenceTransformer:
                           evaluator=evaluation.SequentialEvaluator(evaluators,
                                                                    main_score_function=lambda scores: np.mean(scores)),
                           epochs=num_epochs,
-                          device='cuda',
                           warmup_steps=num_warmup_steps,
                           evaluation_steps=num_evaluation_steps,
                           output_path=output_path,
