@@ -144,12 +144,12 @@ class BNSentenceTransformer:
         logging.info('Evaluation appended')
 
         logging.info('Student Model training is going to start')
-        student_model.device
         # Train the model
         student_model.fit(train_objectives=[(train_dataloader, train_loss)],
                           evaluator=evaluation.SequentialEvaluator(evaluators,
                                                                    main_score_function=lambda scores: np.mean(scores)),
                           epochs=num_epochs,
+                          device='cuda',
                           warmup_steps=num_warmup_steps,
                           evaluation_steps=num_evaluation_steps,
                           output_path=output_path,
