@@ -1,4 +1,15 @@
-# bangla_sentence_transformer
+# Bangla Sentence Transformer
+
+ Sentence Transformer is a cutting-edge natural language processing (NLP) model that is capable of encoding and transforming sentences into high-dimensional embeddings. With this technology, we can unlock powerful insights and applications in various fields like text classification, information retrieval, semantic search, and more.
+
+This model is finetune from ```stsb-xlm-r-multilingual``` 
+ it's now available on Hugging Face! 🎉🎉
+
+## Install
+
+```
+pip install -U sentence-transformers
+```
 
 ```python
 from sentence_transformers import SentenceTransformer
@@ -62,3 +73,5 @@ for i in range(len(sentences)):
         sim_score = float(pytorch_cos_sim(sentences_embeddings[i], sentences_embeddings[j]))
         print(sen_1, '----->', sen_2, sim_score)
 ```
+
+## Best MSE: 7.57528096437454
