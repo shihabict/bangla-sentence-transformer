@@ -7,7 +7,8 @@ venv/
 *.pickle
 *.pdf
 DATA/
-/models
-/bengal_transformer
-/bangla_transformer_100
+models/
+bangla_transformer/
+bangla_transformer_100/
+bangla_transformer_all_data/
 test.py
