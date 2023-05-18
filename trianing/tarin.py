@@ -73,6 +73,7 @@ class BNSentenceTransformer:
         logging.info('Evaluation appended')
 
         logging.info('Student Model training is going to start')
+        student_model.device
         # Train the model
         student_model.fit(train_objectives=[(train_dataloader, train_loss)],
                           evaluator=evaluation.SequentialEvaluator(evaluators,
