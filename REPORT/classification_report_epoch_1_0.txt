@@ -1,0 +1,4 @@
+./bangla_snt_indic : 0.555
+./bangla_snt : 0.9500000000000001
+sentence-transformers/all-MiniLM-L6-v2 : 0.8399999999999999
+sentence-transformers/all-mpnet-base-v2 : 0.85

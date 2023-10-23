@@ -1,0 +1,7 @@
+./bangla_snt : 0.9606953892668179
+./bangla_snt : 0.9690098261526833
+sentence-transformers/all-MiniLM-L6-v2 : 0.9221466364323507
+sentence-transformers/all-mpnet-base-v2 : 0.9229024943310657
+sentence-transformers/stsb-xlm-r-multilingual : 0.9773242630385488
+l3cube-pune/indic-sentence-bert-nli : 0.9697656840513983
+l3cube-pune/indic-sentence-similarity-sbert : 0.9705215419501134

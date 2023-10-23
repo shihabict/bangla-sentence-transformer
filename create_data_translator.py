@@ -5,10 +5,11 @@ with open(input_path) as file:
     lines = file.readlines()
 lines = lines[:100]
 from translate import Translator
-translator= Translator(to_lang="en",from_lang='bn')
+
+translator = Translator(to_lang="en", from_lang='bn')
 
 for line in tqdm(lines):
-    line=line.strip('\n').strip()
+    line = line.strip('\n').strip()
 
     out = translator.translate(line)
     # print(out)
