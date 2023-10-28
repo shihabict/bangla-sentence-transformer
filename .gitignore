@@ -6,6 +6,7 @@ venv/
 *.pkl
 *.pickle
 *.pdf
+trianing/
 DATA/
 models/
 racism_results/
