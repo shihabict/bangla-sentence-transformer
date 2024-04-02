@@ -1,5 +1,6 @@
 __pycache__/
 venv/
+venv/
 .idea/
 .pytest_cache/
 *.pyc
@@ -8,6 +9,7 @@ venv/
 *.pdf
 trianing/
 DATA/
+REPORT/
 models/
 racism_results/
 font/
