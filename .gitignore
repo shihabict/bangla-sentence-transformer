@@ -21,6 +21,7 @@ related_papers/
 bangla_snt/
 bangla_snt_indic/
 bangla_transformer/
+transformer_model/
 bangla_transformer_100/
 bangla_transformer_all_data/
 test.py
