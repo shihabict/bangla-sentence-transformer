@@ -24,6 +24,7 @@ bangla_transformer/
 transformer_model/
 bangla_transformer_100/
 bangla_transformer_all_data/
+transformer_model_2/
 test.py
 test_training.py
 test_gpu.py
