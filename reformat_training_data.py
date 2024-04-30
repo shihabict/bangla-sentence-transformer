@@ -15,14 +15,15 @@ class TrainingDataFormatter:
     def load_data(self):
         with open(self.input_path, 'r') as file:
             lines = file.readlines()
+        print(f"Data Size: {len(lines)}")
 
-        p_map(self.save_date, lines, **{"num_cpus": 8})
+        p_map(self.save_date, lines, **{"num_cpus": 10})
         # for line in tqdm(lines):
         #     self.save_date(line)
 
 
 if __name__ == '__main__':
-    input_path = 'DATA/dataset.txt'
-    output_path = 'DATA/reformated_dataset.txt'
+    input_path = 'DATA/combined_data.txt'
+    output_path = 'DATA/reformated_combine_dataset.txt'
     formatter = TrainingDataFormatter(input_path, output_path)
     formatter.load_data()
