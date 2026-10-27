@@ -75,3 +75,18 @@ print(sentence_embeddings)
 ```
 
 ## Best MSE: 7.57528096437454
+
+
+If you use this model, please cite the following paper:
+```
+@INPROCEEDINGS{10754765,
+  author={Uddin, Md. Shihab and Haque, Mohd Ariful and Rifat, Rakib Hossain and Kamal, Marufa and Gupta, Kishor Datta and George, Roy},
+  booktitle={2024 IEEE 15th Annual Ubiquitous Computing, Electronics & Mobile Communication Conference (UEMCON)}, 
+  title={Bangla SBERT - Sentence Embedding Using Multilingual Knowledge Distillation}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={495-500},
+  keywords={Sentiment analysis;Machine learning algorithms;Accuracy;Text categorization;Semantics;Transformers;Mobile communication;Information retrieval;Machine translation;Sentence Similarity;Sentence Transformer;SBERT;Knowledge Distillation;Bangla NLP},
+  doi={10.1109/UEMCON62879.2024.10754765}}
+```
